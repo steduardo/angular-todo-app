@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Todo } from './todo';
 import { ApiService } from './api.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { ApiLocalService } from './api-local-storage.service';
 
 @Injectable()
 export class TodoDataService {
 
   constructor(
-    private api: ApiService
+    private api: ApiLocalService
   ) {
   }
 
