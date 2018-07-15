@@ -19,7 +19,7 @@ export class ApiLocalService implements ApiService {
   }
 
   public getAllTodos(): Observable<Todo[]> {
-    return of(this._todos);
+    return of(this._todos.slice(0)); // slice a copy, don't send a ref to local member var
   }
 
   public createTodo(todo: Todo): Observable<Todo> {
