@@ -5,5 +5,13 @@
 
 export const environment = {
   production: false,
+  amplify: {
+    Auth: {
+      // identityPoolId: 'eu-west-1:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+      region: 'eu-west-1',
+      userPoolId: 'eu-west-1_Sv10AHOAd',
+      userPoolWebClientId: '5iq369qa6kandgc3402u1b1t6t'
+    }
+  },
   apiUrl: 'http://localhost:3000'
 };

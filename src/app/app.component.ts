@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from './todo-data.service';
 import { Todo } from './todo';
-
+import { AuthService } from './auth/auth.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,9 +12,12 @@ import { Todo } from './todo';
 export class AppComponent implements OnInit {
 
   todos: Todo[] = [];
+  subscription: Subscription;
+  public loggedIn: boolean;
 
   constructor(
-    private todoDataService: TodoDataService
+    private todoDataService: TodoDataService,
+    public auth: AuthService
   ) {
   }
 
@@ -25,6 +29,18 @@ export class AppComponent implements OnInit {
           this.todos = todos;
         }
       );
+    this.subscription = this.auth.isAuthenticated()
+      .subscribe(result => {
+        this.loggedIn = result;
+      });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  onClickLogout() {
+    this.auth.signOut();
   }
 
   onAddTodo(todo) {
