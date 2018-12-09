@@ -1,13 +1,9 @@
-<section class="todoapp">
-  <app-todo-list-header
-    (add)="onAddTodo($event)"
-  ></app-todo-list-header>
-  <app-todo-list
-    [todos]="todos"
-    (toggleComplete)="onToggleTodoComplete($event)"
-    (remove)="onRemoveTodo($event)"
-  ></app-todo-list>
-  <app-todo-list-footer
-    [todos]="todos"
-  ></app-todo-list-footer>
-</section>
+<nav>
+  <ul class="main-nav">
+    <li><a [routerLink]="['/']">Home</a></li>
+    <li *ngIf="!(auth.loggedIn | async)"><a [routerLink]="['/login']">Login</a></li>
+    <li *ngIf="(auth.loggedIn | async)"><a (click)="onClickLogout()">Logout</a></li>
+    <li><a [routerLink]="['/signup']">SignUp</a></li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>
