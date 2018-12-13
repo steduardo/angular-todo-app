@@ -18,10 +18,6 @@ export class AuthService {
   ) {
     Amplify.configure(environment.amplify);
     this.loggedIn = new BehaviorSubject<boolean>(false);
-    this.getIdToken()
-    .subscribe((t) => {
-      console.log(t);
-    });
   }
 
   // fetch API Jwt
