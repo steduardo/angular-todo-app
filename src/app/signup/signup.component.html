@@ -1,18 +1,21 @@
-<h1>Sign up</h1>
+<h2>Sign up</h2>
 
-<button (click)="successfullySignup = true" *ngIf="!successfullySignup">Confirmation from Email and Code</button>
 
 <div class="signup" *ngIf="!successfullySignup">
   <form [formGroup]="signupForm" (ngSubmit)="onSubmitSignup(signupForm.value)">
     <p>
+      <label>Name: </label>
+      <input class="form-control" type="text" formControlName="name">
+    </p>
+    <p>
       <label>Email: </label>
-      <input type="email" formControlName="email">
+      <input class="form-control" type="email" formControlName="email">
     </p>
     <p>
       <label>Password: </label>
-      <input type="password" formControlName="password">
+      <input class="form-control" type="password" formControlName="password">
     </p>
-    <button type="submit">Submit</button>
+    <button class="btn-login" type="submit">Submit</button>
   </form>
 </div>
 
@@ -20,12 +23,14 @@
   <form [formGroup]="confirmationForm" (ngSubmit)="onSubmitConfirmation(confirmationForm.value)">
     <p>
       <label>Email: </label>
-      <input type="email" formControlName="email">
+      <input class="form-control" type="email" formControlName="email">
     </p>
     <p>
       <label>Confirmation Code: </label>
-      <input type="text" formControlName="confirmationCode">
+      <input class="form-control" type="text" formControlName="confirmationCode">
     </p>
-    <button type="submit">Confirm</button>
+    <button class="btn-login" type="submit">Confirm</button>
   </form>
 </div>
+<p><button (click)="successfullySignup = true" *ngIf="!successfullySignup">Confirm account with email code</button></p>
+<div class="error" *ngIf="signupErrorMsg"><p>{{ signupErrorMsg }}</p></div>

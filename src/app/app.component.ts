@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   todos: Todo[] = [];
   subscription: Subscription;
   public loggedIn: boolean;
+  public isLoaded: boolean;
 
   constructor(
     private todoDataService: TodoDataService,
@@ -31,6 +32,8 @@ export class AppComponent implements OnInit {
       );
     this.subscription = this.auth.isAuthenticated()
       .subscribe(result => {
+        // signal firstload done
+        this.isLoaded = true;
         this.loggedIn = result;
       });
   }

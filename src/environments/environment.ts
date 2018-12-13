@@ -9,9 +9,12 @@ export const environment = {
     Auth: {
       // identityPoolId: 'eu-west-1:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
       region: 'eu-west-1',
-      userPoolId: 'eu-west-1_Sv10AHOAd',
-      userPoolWebClientId: '5iq369qa6kandgc3402u1b1t6t'
+      userPoolId: 'eu-west-1_Fh8O8QDIE',
+      userPoolWebClientId: '1uinq9gg0cq61g2r2odananses'
     }
+  },
+  apiGateway: {
+    invokeURL: 'https://yq4rk02g7k.execute-api.eu-west-1.amazonaws.com/dev'
   },
   apiUrl: 'http://localhost:3000'
 };

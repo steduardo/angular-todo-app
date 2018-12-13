@@ -12,6 +12,7 @@ export class SignupComponent implements OnInit {
   public signupForm: FormGroup;
   public confirmationForm: FormGroup;
   public successfullySignup: boolean;
+  public signupErrorMsg: string;
 
   constructor(
     private fb: FormBuilder,
@@ -26,6 +27,8 @@ export class SignupComponent implements OnInit {
   initForm() {
     this.signupForm = this.fb.group({
       'email': ['', Validators.required],
+      'name': ['', Validators.required],
+      'username': ['', Validators.required],
       'password': ['', Validators.required]
     });
     this.confirmationForm = this.fb.group({
@@ -36,13 +39,19 @@ export class SignupComponent implements OnInit {
 
   onSubmitSignup(value: any) {
     const email = value.email, password = value.password;
-    this.auth.signUp(email, password)
+    const attr = {};
+    attr['email'] = value.email;
+    if (value.name) {
+      attr['name'] = value.name;
+    }
+    this.auth.signUp(email, password, attr)
       .subscribe(
         result => {
           this.successfullySignup = true;
         },
         error => {
           console.log(error);
+          this.signupErrorMsg = error.message;
         });
   }
 

@@ -13,29 +13,29 @@ export class ApiMockService {
 
   public getAllTodos(): Observable<Todo[]> {
     return observableOf([
-      new Todo({id: 1, title: 'Read article', complete: false})
+      new Todo({id: '1', title: 'Read article', complete: false})
     ]);
   }
 
   public createTodo(todo: Todo): Observable<Todo> {
     return observableOf(
-      new Todo({id: 1, title: 'Read article', complete: false})
+      new Todo({id: '1', title: 'Read article', complete: false})
     );
   }
 
-  public getTodoById(todoId: number): Observable<Todo> {
+  public getTodoById(todoId: string): Observable<Todo> {
     return observableOf(
-      new Todo({id: 1, title: 'Read article', complete: false})
+      new Todo({id: '1', title: 'Read article', complete: false})
     );
   }
 
   public updateTodo(todo: Todo): Observable<Todo> {
     return observableOf(
-      new Todo({id: 1, title: 'Read article', complete: false})
+      new Todo({id: '1', title: 'Read article', complete: false})
     );
   }
 
-  public deleteTodoById(todoId: number): Observable<null> {
+  public deleteTodoById(todoId: string): Observable<null> {
     return null;
   }
 }

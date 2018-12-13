@@ -18,11 +18,30 @@ export class AuthService {
   ) {
     Amplify.configure(environment.amplify);
     this.loggedIn = new BehaviorSubject<boolean>(false);
+    this.getIdToken()
+    .subscribe((t) => {
+      console.log(t);
+    });
+  }
+
+  // fetch API Jwt
+  public getIdToken(): Observable<string> {
+    return fromPromise(Auth.currentSession())
+      .pipe(
+        map((sesh) => {
+          return sesh.getIdToken().getJwtToken();
+        })
+      );
   }
 
   /** signup */
-  public signUp(email, password): Observable<any> {
-    return fromPromise(Auth.signUp(email, password));
+  public signUp(email, password, attributes?): Observable<any> {
+    const signUpParams = {
+      username: email,
+      password: password,
+      attributes: attributes
+    };
+    return fromPromise(Auth.signUp(signUpParams));
   }
 
   /** confirm code */

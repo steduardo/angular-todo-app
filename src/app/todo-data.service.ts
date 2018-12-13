@@ -8,17 +8,18 @@ import { ApiLocalService } from './api-local-storage.service';
 export class TodoDataService {
 
   constructor(
-    private api: ApiLocalService
+    private api: ApiService
   ) {
   }
 
   // Simulate POST /todos
   addTodo(todo: Todo): Observable<Todo> {
+    todo.id = this.guid();
     return this.api.createTodo(todo);
   }
 
   // Simulate DELETE /todos/:id
-  deleteTodoById(todoId: number): Observable<Todo> {
+  deleteTodoById(todoId: string): Observable<Todo> {
     return this.api.deleteTodoById(todoId);
   }
 
@@ -33,7 +34,7 @@ export class TodoDataService {
   }
 
   // Simulate GET /todos/:id
-  getTodoById(todoId: number): Observable<Todo> {
+  getTodoById(todoId: string): Observable<Todo> {
     return this.api.getTodoById(todoId);
   }
 
@@ -43,4 +44,13 @@ export class TodoDataService {
     return this.api.updateTodo(todo);
   }
 
+  private guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+  }
 }

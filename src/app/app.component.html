@@ -1,9 +1,9 @@
 <nav>
-  <ul class="main-nav">
-    <li><a [routerLink]="['/']">Home</a></li>
+  <ul class="main-nav d-flex text-bold list-style-none" *ngIf="isLoaded">
+    <!-- <li><a [routerLink]="['/']">Home</a></li> -->
     <li *ngIf="!(auth.loggedIn | async)"><a [routerLink]="['/login']">Login</a></li>
+    <li *ngIf="!(auth.loggedIn | async)"><a [routerLink]="['/signup']">Sign Up</a></li>
     <li *ngIf="(auth.loggedIn | async)"><a (click)="onClickLogout()">Logout</a></li>
-    <li><a [routerLink]="['/signup']">SignUp</a></li>
   </ul>
 </nav>
 <router-outlet></router-outlet>

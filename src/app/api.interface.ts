@@ -7,9 +7,9 @@ export interface ApiService {
 
   createTodo(todo: Todo): Observable<Todo>;
 
-  getTodoById(todoId: number): Observable<Todo>;
+  getTodoById(todoId: string): Observable<Todo>;
 
   updateTodo(todo: Todo): Observable<Todo>;
 
-  deleteTodoById(todoId: number): Observable<null>;
+  deleteTodoById(todoId: string): Observable<null>;
 }
