@@ -30,6 +30,15 @@ export class AuthService {
       );
   }
 
+  public getUserId(): Observable<string> {
+    return fromPromise(Auth.currentAuthenticatedUser())
+      .pipe(
+        map((user) => {
+          return user.username;
+        })
+      );
+  }
+
   /** signup */
   public signUp(email, password, attributes?): Observable<any> {
     const signUpParams = {

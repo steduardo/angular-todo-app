@@ -6,9 +6,6 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Response } from '@angular/http';
 import { Todo } from './todo';
-
-
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
 
@@ -50,13 +47,18 @@ export class ApiService {
   }
 
   public createTodo(todo: Todo): Observable<Todo> {
-    return this.getAuthHeaders()
+    // set user id first
+    return this.auth.getUserId()
         .pipe(
+          flatMap((userid) => {
+            todo.id = userid; // overwrite any existing id's
+            return this.getAuthHeaders();
+          }),
           flatMap((headers) => {
             return this.http
-              .post<Todo>(API_URL + '/todos', todo);
-            }),
-            catchError(this.handleError)
+              .post<Todo>(API_URL + '/todos', todo, headers);
+          }),
+          catchError(this.handleError)
         );
   }
 
@@ -65,18 +67,22 @@ export class ApiService {
         .pipe(
           flatMap((headers) => {
             return this.http
-              .get<Todo>(API_URL + '/todos/' + todoId);
+              .get<Todo>(API_URL + '/todos/' + todoId, headers);
             }),
             catchError(this.handleError)
         );
   }
 
   public updateTodo(todo: Todo): Observable<Todo> {
-    return this.getAuthHeaders()
+    return this.auth.getUserId()
         .pipe(
+          flatMap((userid) => {
+            todo.id = userid; // overwrite any existing id's
+            return this.getAuthHeaders();
+          }),
           flatMap((headers) => {
             return this.http
-              .put<Todo>(API_URL + '/todos/' + todo.id, todo);
+              .put<Todo>(API_URL + '/todos/' + todo.id, todo, headers);
             }),
             catchError(this.handleError)
         );
@@ -87,7 +93,7 @@ export class ApiService {
         .pipe(
           flatMap((headers) => {
             return this.http
-              .delete<null>(API_URL + '/todos/' + todoId);
+              .delete<null>(API_URL + '/todos/' + todoId, headers);
             }),
             catchError(this.handleError)
         );
