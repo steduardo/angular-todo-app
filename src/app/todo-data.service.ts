@@ -23,6 +23,11 @@ export class TodoDataService {
     return this.api.deleteTodoById(todoId);
   }
 
+  // Simulate DELETE /todos/:id
+  deleteTodo(userId: string, title: string): Observable<Todo> {
+    return this.api.deleteTodo(userId, title);
+  }
+
   // Simulate PUT /todos/:id
   updateTodo(todo: Todo): Observable<Todo> {
     return this.api.updateTodo(todo);

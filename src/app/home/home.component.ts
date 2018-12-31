@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
 
   onRemoveTodo(todo) {
     this.todoDataService
-      .deleteTodoById(todo.id)
+      .deleteTodo(todo.id, todo.title)
       .subscribe(
         (_) => {
           this.todos = this.todos.filter((t) => t.id !== todo.id);
