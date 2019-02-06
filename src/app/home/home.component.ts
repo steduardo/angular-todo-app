@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
       .deleteTodo(todo.id, todo.title)
       .subscribe(
         (_) => {
-          this.todos = this.todos.filter((t) => t.id !== todo.id);
+          this.todos = this.todos.filter((t) => t.title !== todo.title);
         }
       );
   }
